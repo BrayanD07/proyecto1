@@ -1,0 +1,235 @@
+Found a 32 line (181 tokens) duplication in the following files: 
+Starting at line 36 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\EmployeeController.cs
+Starting at line 88 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\EmployeeController.cs
+
+                            select new dtoEmployee
+                            {
+                                BusinessEntityID = e.BusinessEntityID,
+                                NationalIDNumber = e.NationalIDNumber,
+                                LoginID = e.LoginID,
+                                OrganizationNode = e.OrganizationNode.ToString(),
+                                OrganizationLevel = e.OrganizationLevel.ToString(),
+                                JobTitle = e.JobTitle,
+                                BirthDate = e.BirthDate,
+                                MaritalStatus = e.MaritalStatus,
+                                Gender = e.Gender,
+                                HireDate = e.HireDate,
+                                SalariedFlag = e.SalariedFlag,
+                                VacationHours = e.VacationHours,
+                                SickLeaveHours = e.SickLeaveHours,
+                                CurrentFlag = e.CurrentFlag,
+                                ModifiedDateEmployee = e.ModifiedDate,
+                                Person = new dtoPerson{
+                                    PersonType = p.PersonType,
+                                    NameStyle = p.NameStyle,
+                                    Title = p.Title,
+                                    FirstName = p.FirstName, 
+                                    MiddleName = p.MiddleName,
+                                    LastName = p.LastName,
+                                    Suffix = p.Suffix,
+                                    EmailPromotion = p.EmailPromotion,
+                                    AdditionalContactInfo = p.AdditionalContactInfo,
+                                    Demographics = p.Demographics,
+                                    ModifiedDatePerson = p.ModifiedDate
+                                }
+                            };
+                var employee = await query.ToListAsync();
+=====================================================================
+Found a 11 line (91 tokens) duplication in the following files: 
+Starting at line 7 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\DTOs\dtoPerson.cs
+Starting at line 13 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\Person.cs
+
+        public string PersonType { get; set; }
+        public bool NameStyle { get; set; }
+        public string Title { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string Suffix { get; set; }
+        public int EmailPromotion { get; set; }
+        public string AdditionalContactInfo { get; set; }
+        public string Demographics { get; set; }
+        public DateTime ModifiedDatePerson { get; set; }
+=====================================================================
+Found a 8 line (46 tokens) duplication in the following files: 
+Starting at line 1 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\EmployeeController.cs
+Starting at line 1 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\PersonController.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TodoApi.Models;
+=====================================================================
+Found a 7 line (40 tokens) duplication in the following files: 
+Starting at line 12 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\BusinessEntity.cs
+Starting at line 24 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\Employee.cs
+
+        public int BusinessEntityID { get; set; }
+        public System.Guid rowguid { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+
+        public virtual Person Person { get; set; }
+    }
+}
+=====================================================================
+Found a 17 line (32 tokens) duplication in the following files: 
+Starting at line 148 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\EmployeeController.cs
+Starting at line 62 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\PersonController.cs
+
+                if (!EmployeeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // POST: api/Employee
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+=====================================================================
+Found a 8 line (32 tokens) duplication in the following files: 
+Starting at line 1 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\BusinessEntity.cs
+Starting at line 1 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\Person.cs
+
+using System;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TodoApi.Models
+{
+    [Table("BusinessEntity", Schema = "Person")]
+=====================================================================
+Found a 8 line (31 tokens) duplication in the following files: 
+Starting at line 32 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\PersonController.cs
+Starting at line 102 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\PersonController.cs
+
+        public async Task<ActionResult<Person>> GetPerson(int id)
+        {
+            var person = await _context.People.FindAsync(id);
+
+            if (person == null)
+            {
+                return NotFound();
+            }
+=====================================================================
+Found a 8 line (30 tokens) duplication in the following files: 
+Starting at line 28 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\EmployeeController.cs
+Starting at line 81 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\EmployeeController.cs
+
+        public async Task<ActionResult<string>> GetEmployees()
+        {
+            //return await _context.Employees.ToListAsync();
+
+            using(_context)
+            {
+                var query = from p in _context.People 
+                            join e in _context.Employees on p.BusinessEntityID equals e.BusinessEntityID
+=====================================================================
+Found a 5 line (30 tokens) duplication in the following files: 
+Starting at line 12 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\BusinessEntity.cs
+Starting at line 24 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\Employee.cs
+Starting at line 22 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\Person.cs
+
+        public int BusinessEntityID { get; set; }
+        public System.Guid rowguid { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+
+        public virtual Person Person { get; set; }
+=====================================================================
+Found a 5 line (29 tokens) duplication in the following files: 
+Starting at line 5 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Program.cs
+Starting at line 9 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Startup.cs
+
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+=====================================================================
+Found a 4 line (28 tokens) duplication in the following files: 
+Starting at line 7 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\DTOs\dtoEmployee.cs
+Starting at line 11 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\Employee.cs
+
+       public int BusinessEntityID { get; set; }
+        public string NationalIDNumber { get; set; }
+        public string LoginID { get; set; }
+        public string OrganizationNode { get; set; }
+=====================================================================
+Found a 5 line (27 tokens) duplication in the following files: 
+Starting at line 1 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\EmployeeController.cs
+Starting at line 1 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\PersonController.cs
+Starting at line 1 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Program.cs
+Starting at line 1 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Startup.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+=====================================================================
+Found a 4 line (27 tokens) duplication in the following files: 
+Starting at line 13 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\DTOs\dtoEmployee.cs
+Starting at line 17 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\Employee.cs
+
+        public DateTime BirthDate { get; set; }
+        public char MaritalStatus { get; set; }
+        public char Gender { get; set; }
+        public DateTime HireDate { get; set; }
+=====================================================================
+Found a 9 line (26 tokens) duplication in the following files: 
+Starting at line 140 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\EmployeeController.cs
+Starting at line 54 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\PersonController.cs
+
+            _context.Entry(employee).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EmployeeExists(id))
+=====================================================================
+Found a 14 line (25 tokens) duplication in the following files: 
+Starting at line 67 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\EmployeeController.cs
+Starting at line 119 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Controllers\EmployeeController.cs
+
+                var employee = await query.ToListAsync();
+
+                if (employee == null)
+                {
+                    return null;
+                }
+
+                return JsonConvert.SerializeObject(employee);
+
+            }
+        }
+
+        // GET: api/Employee/5
+        [HttpGet("{id}")]
+=====================================================================
+Found a 7 line (25 tokens) duplication in the following files: 
+Starting at line 2 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\BusinessEntity.cs
+Starting at line 1 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\Employee.cs
+Starting at line 2 of C:\Users\Braya\Downloads\Nueva carpeta (6)\AdventureWorksApi-master\Models\Person.cs
+
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TodoApi.Models
+{
+    [Table("BusinessEntity", Schema = "Person")]
